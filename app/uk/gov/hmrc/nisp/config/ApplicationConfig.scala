@@ -28,6 +28,8 @@ trait ApplicationConfig {
   val betaFeedbackUnauthenticatedUrl: String
   val analyticsToken: Option[String]
   val analyticsHost: String
+  val googleTagManagerId: String
+  val isGtmEnabled: String
   val ssoUrl: Option[String]
   val contactFormServiceIdentifier: String
   val contactFrontendPartialBaseUrl: String
@@ -63,6 +65,8 @@ object ApplicationConfig extends ApplicationConfig with ServicesConfig {
   override lazy val betaFeedbackUnauthenticatedUrl = betaFeedbackUrl
   override lazy val analyticsToken: Option[String] = configuration.getString(s"google-analytics.token")
   override lazy val analyticsHost: String = configuration.getString(s"google-analytics.host").getOrElse("auto")
+  override lazy val googleTagManagerId = loadConfig(s"google-tag-manager.id")
+  override lazy val isGtmEnabled = loadConfig(s"google-tag-manager.enabled")
   override lazy val ssoUrl: Option[String] = configuration.getString(s"portal.ssoUrl")
   lazy val frontendTemplatePath: String = configuration.getString("microservice.services.frontend-template-provider.path").getOrElse("/template/mustache")
 
